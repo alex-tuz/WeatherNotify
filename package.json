@@ -6,7 +6,11 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/index.js",
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "migrate:make": "knex migrate:make --knexfile ./src/db/config/knexfile.ts -x ts",
+    "migrate": "knex --knexfile src/db/config/knexfile.ts migrate:latest",
+    "migrate:rollback": "knex --knexfile src/db/config/knexfile.ts migrate:rollback",
+    "seed": "knex --knexfile src/db/config/knexfile.ts seed:run"
   },
   "keywords": [],
   "author": "a.tuz86",
@@ -15,6 +19,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "pg": "^8.16.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
