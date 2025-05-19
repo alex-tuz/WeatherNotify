@@ -4,7 +4,11 @@ import { weatherRepository } from '../repositories/weatherRepository';
 
 const weatherService = new WeatherService(weatherRepository);
 
-export const getWeather = async (req: Request, res: Response, next: NextFunction) => {
+export const getWeather = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
     try {
         const cityName = req.query.city;
 
@@ -15,11 +19,15 @@ export const getWeather = async (req: Request, res: Response, next: NextFunction
 
         const result = await weatherService.getWeatherForCity(cityName);
         res.status(200).json(result);
-    } catch (error: any) {
-        if (error.message === 'CityNotFound') {
-            res.status(404).json({ error: 'City not found' });
-        } else if (error.message === 'WeatherNotFound') {
-            res.status(404).json({ error: 'Weather data not found' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            if (error.message === 'CityNotFound') {
+                res.status(404).json({ error: 'City not found' });
+            } else if (error.message === 'WeatherNotFound') {
+                res.status(404).json({ error: 'Weather data not found' });
+            } else {
+                res.status(500).json({ error: 'Internal server error' });
+            }
         } else {
             res.status(500).json({ error: 'Internal server error' });
         }
