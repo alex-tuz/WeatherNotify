@@ -4,6 +4,8 @@ import { initRoutes } from './routes/routes';
 import dotenv from 'dotenv';
 import path from 'path';
 import { setupSwagger } from './middleware/swagger';
+import { WeatherNotificationService } from './services/weatherNotificationService';
+import logger from './utils/logger';
 
 dotenv.config();
 
@@ -15,6 +17,10 @@ app.use(express.json());
 setupSwagger(app);
 
 initRoutes(app);
+
+logger.info('Starting weather notification scheduler...');
+const weatherNotificationService = new WeatherNotificationService();
+weatherNotificationService.startScheduler();
 
 const PORT = process.env.PORT || 3000;
 
