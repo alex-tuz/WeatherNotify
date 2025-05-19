@@ -11,7 +11,9 @@
     "migrate": "knex --knexfile src/db/config/knexfile.ts migrate:latest",
     "migrate:rollback": "knex --knexfile src/db/config/knexfile.ts migrate:rollback",
     "seed": "knex --knexfile src/db/config/knexfile.ts seed:run",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "a.tuz86",
@@ -34,6 +36,11 @@
     "@types/node": "^22.15.18",
     "@types/nodemailer": "^6.4.17",
     "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
     "prettier": "^3.5.3",
     "ts-node-dev": "^2.0.0"
   }
