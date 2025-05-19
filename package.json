@@ -10,7 +10,8 @@
     "migrate:make": "knex migrate:make --knexfile ./src/db/config/knexfile.ts -x ts",
     "migrate": "knex --knexfile src/db/config/knexfile.ts migrate:latest",
     "migrate:rollback": "knex --knexfile src/db/config/knexfile.ts migrate:rollback",
-    "seed": "knex --knexfile src/db/config/knexfile.ts seed:run"
+    "seed": "knex --knexfile src/db/config/knexfile.ts seed:run",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "keywords": [],
   "author": "a.tuz86",
@@ -28,6 +29,7 @@
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.18",
+    "prettier": "^3.5.3",
     "ts-node-dev": "^2.0.0"
   }
 }
