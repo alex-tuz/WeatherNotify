@@ -100,7 +100,7 @@ npm run seed
 
 7. Start the backend server:
 ```bash
-npm start
+npm run dev
 ```
 
 8. Start the frontend development server:
@@ -120,6 +120,29 @@ The application will be available at:
 - `POST /api/subscribe` - Subscribe to weather updates
 - `POST /api/confirm` - Confirm subscription
 - `POST /api/unsubscribe` - Unsubscribe from updates
+
+## Docker Support
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Running with Docker
+
+1. Build and start the containers:
+```bash
+docker-compose up --build
+```
+
+2. Run database migrations:
+```bash
+docker-compose exec api npm run migrate
+```
+
+The application will be available at:
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3000
+- PostgreSQL: localhost:5432
 
 ## License
 
