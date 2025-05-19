@@ -4,7 +4,7 @@ import { router as subscribeRoutes } from './subscribeRoutes';
 import { router as confirmRoutes } from './confirmRoutes';
 import { router as unsubscribeRoutes } from './unsubscribeRoutes';
 
-const initRoutes = (app: Application) => {
+const initRoutes = (app: Application): void => {
     app.use('/api/weather', weatherRoutes);
     app.use('/api/subscribe', subscribeRoutes);
     app.use('/api/confirm', confirmRoutes);

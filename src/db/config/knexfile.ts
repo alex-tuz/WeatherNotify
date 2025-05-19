@@ -4,8 +4,6 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
-console.log('DB_USER:', process.env.DB_USER);
-
 const config: Knex.Config = {
     client: 'pg',
     connection: {
