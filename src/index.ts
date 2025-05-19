@@ -8,6 +8,7 @@ import { validateConfig } from './config/validate';
 import { errorHandler } from './middleware/error-handler';
 import logger from './utils/logger';
 import { setupSwagger } from './middleware/swagger';
+import { runMigrations } from './utils/migration';
 
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught Exception:', error);
@@ -26,6 +27,9 @@ validateConfig();
 const startServer = async (): Promise<void> => {
     try {
         logger.info('Starting server initialization...');
+        logger.info('Running database migrations...');
+        await runMigrations();
+        logger.info('Database migrations completed');
 
         const app = express();
 
