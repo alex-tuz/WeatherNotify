@@ -4,7 +4,9 @@
   "description": "WeatherNotify is an API service that allows users to subscribe to regular weather forecast updates for their chosen cities",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "clean": "rimraf dist",
+    "copy-swagger": "copyfiles -u 1 src/swagger/swagger.yaml dist/src",
+    "build": "npm run clean && tsc && npm run copy-swagger",
     "start": "node dist/src/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "migrate:make": "knex migrate:make --knexfile ./src/db/config/knexfile.ts -x ts",
@@ -45,10 +47,12 @@
     "@types/yamljs": "^0.2.34",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
     "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
     "ts-node-dev": "^2.0.0"
   }
 }

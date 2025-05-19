@@ -2,7 +2,9 @@ import { Knex } from 'knex';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+const isTs = path.extname(__filename) === '.ts';
+
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 const config: Knex.Config = {
     client: 'pg',
@@ -14,12 +16,14 @@ const config: Knex.Config = {
         port: Number(process.env.DB_PORT) || 5432,
     },
     migrations: {
-        directory: path.join(__dirname, '../migrations'),
-        extension: 'ts',
+        directory: path.resolve(__dirname, '../../db/migrations'),
+        extension: isTs ? 'ts' : 'js',
+        loadExtensions: [isTs ? '.ts' : '.js'],
     },
     seeds: {
-        directory: path.join(__dirname, '../seeds'),
-        extension: 'ts',
+        directory: path.resolve(__dirname, '../../db/seeds'),
+        extension: isTs ? 'ts' : 'js',
+        loadExtensions: [isTs ? '.ts' : '.js'],
     },
     debug: true,
 };
