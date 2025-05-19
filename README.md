@@ -1,39 +1,81 @@
-# Weather Notify API
+# Weather Notify
 
-Backend service for weather notifications with email subscription functionality.
+A weather notification application that allows users to check current weather conditions and subscribe to daily weather updates.
 
 ## Features
 
-- Weather data retrieval by city name
-- Email subscription for weather updates
-- Email confirmation system
-- Weather data caching
+- Search for cities and get current weather information
+- View temperature, humidity, and weather description
+- Subscribe to daily weather updates via email
+- Email confirmation system for subscriptions
+- Unsubscribe option
 
 ## Tech Stack
 
+### Backend
 - Node.js
 - Express.js
 - PostgreSQL
 - Knex.js (SQL query builder)
-- Nodemailer (email service)
-- Jest (testing)
+- Nodemailer (for email notifications)
 
-## Prerequisites
+### Frontend
+- React
+- React Router
+- Bootstrap
+- Vite
 
+## Project Structure
+
+```
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/        # Page components
+│   │   ├── services/     # API services
+│   │   └── App.jsx       # Main application component
+│   └── package.json
+│
+├── src/                   # Backend application
+│   ├── controllers/      # Route controllers
+│   ├── db/              # Database configuration
+│   ├── repositories/    # Data access layer
+│   ├── routes/         # API routes
+│   ├── services/       # Business logic
+│   └── app.js         # Application entry point
+│
+└── package.json
+```
+
+## Getting Started
+
+### Prerequisites
 - Node.js (v14 or higher)
 - PostgreSQL
-- SMTP server for email sending
+- npm or yarn
 
-## Installation
+### Installation
 
-1. Clone the repository
-2. Install dependencies:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/weather-notify.git
+cd weather-notify
+```
+
+2. Install backend dependencies:
 ```bash
 npm install
 ```
 
-3. Create a `.env` file in the root directory with the following variables:
-```env
+3. Install frontend dependencies:
+```bash
+cd client
+npm install
+```
+
+4. Set up environment variables:
+Create a `.env` file in the root directory with the following variables:
+```
 APP_URL=http://localhost:3000
 PORT=3000
 DB_HOST=localhost
@@ -47,62 +89,59 @@ SMTP_USER=your_email
 SMTP_PASS=your_password
 ```
 
-4. Run database migrations:
+5. Run database migrations:
 ```bash
 npm run migrate
 ```
-
-5. Run database seeds:
+6. Run database seeds:
 ```bash
 npm run seed
 ```
 
-## Running the Application
-
-Development mode:
-```bash
-npm run dev
-```
-
-Production mode:
+7. Start the backend server:
 ```bash
 npm start
 ```
 
+8. Start the frontend development server:
+```bash
+cd client
+npm run dev
+```
+
+The application will be available at:
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3000
+
 ## API Endpoints
 
-### Weather
-- `GET /weather?city={cityName}` - Get current weather for a city
-
-### Subscription
-- `POST /subscribe` - Subscribe to weather updates
-  - Body: `{ email: string, city: string }`
-- `GET /confirm/:token` - Confirm email subscription
-
-## Testing
-
-Run tests:
-```bash
-npm test
-```
-
-Run tests with coverage:
-```bash
-npm run test:coverage
-```
-
-## Docker Support
-
-Build the image:
-```bash
-docker build -t weather-notify-api .
-```
-
-Run the container:
-```bash
-docker run -p 3000:3000 weather-notify-api
-```
+- `GET /api/cities?q={query}` - Search for cities
+- `GET /api/weather?city={city}` - Get weather for a city
+- `POST /api/subscribe` - Subscribe to weather updates
+- `POST /api/confirm` - Confirm subscription
+- `POST /api/unsubscribe` - Unsubscribe from updates
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
+
+## Future Plans
+
+### Backend Improvements
+
+1. **Event Manager for Email Notifications**
+   - Implement a simplified event manager in SubscriptionService
+   - Make email sending asynchronous to improve performance
+   - Add email queue management
+   - Implement retry mechanism for failed email attempts
+
+2. **City Views Enhancement**
+   - Utilize the "city_views" database table
+   - Support multiple representations of the same city
+   - Add city name variations and aliases
+   - Improve city search accuracy with different name formats
+
+3. **Response Caching**
+   - Implement caching weather data
+   - Cache city search results
+   - Add cache headers for API responses
