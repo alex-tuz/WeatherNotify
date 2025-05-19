@@ -3,6 +3,7 @@ import cors from 'cors';
 import { initRoutes } from './routes/routes';
 import dotenv from 'dotenv';
 import path from 'path';
+import { setupSwagger } from './middleware/swagger';
 
 dotenv.config();
 
@@ -10,6 +11,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+setupSwagger(app);
 
 initRoutes(app);
 
